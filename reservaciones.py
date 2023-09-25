@@ -7,11 +7,11 @@ from tkcalendar import DateEntry
 # Función para guardar una nueva reservación en el archivo JSON
 def guardar_reservacion(entries, nueva_reservacion_window):
     nueva_reservacion = {
-        "Fecha": entries["Fecha"].get_date(),
+        "Fecha": entries["Fecha"].get_date().strftime("%Y-%m-%d"),  # Obtener la fecha y formatearla
         "Cliente": entries["Cliente"].get(),
-        "Reserva": entries["Reserva"].get_date(),
-        "Entrada": entries["Entrada"].get_date(),
-        "Salida": entries["Salida"].get_date(),
+        "Reserva": entries["Reserva"].get_date().strftime("%Y-%m-%d"),  # Obtener la fecha y formatearla
+        "Entrada": entries["Entrada"].get_date().strftime("%Y-%m-%d"),  # Obtener la fecha y formatearla
+        "Salida": entries["Salida"].get_date().strftime("%Y-%m-%d"),  # Obtener la fecha y formatearla
         "Habitación": entries["Habitación"].get(),
         "Estadia": entries["Estadia"].get(),
         "Tipo": entries["Tipo"].get(),
@@ -47,6 +47,8 @@ def abrir_formulario():
     # Crear y colocar etiquetas y campos de entrada en el formulario
     campos = ["Fecha", "Cliente", "Reserva", "Entrada", "Salida", "Habitación", "Estadia", "Tipo", "Preferencias", "Personas", "Contacto", "Precio Total", "Pago", "Notas", "Estado"]
     entries = {}
+
+    #Poner las fechas en su formato
     for i, campo in enumerate(campos):
         tk.Label(nueva_reservacion_window, text=campo + ":").grid(row=i, column=0, sticky="e")
         if campo in ["Fecha", "Reserva", "Entrada", "Salida"]:
